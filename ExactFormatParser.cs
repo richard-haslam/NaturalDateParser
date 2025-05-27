@@ -40,27 +40,17 @@ namespace NaturalDateParsing
 
         public static bool TryParse(string input, out DateTime result)
         {
-            input = input.Trim();
-
-            if (DateTimeOffset.TryParseExact(
-                input,
-                _customFormats.ToArray(),
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
-                out var dto))
+            foreach (var format in _customFormats)
             {
-                result = dto.UtcDateTime;
-                return true;
-            }
-
-            if (DateTime.TryParseExact(
-                input,
-                _customFormats.ToArray(),
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.AllowWhiteSpaces,
-                out result))
-            {
-                return true;
+                if (DateTime.TryParseExact(
+                    input,
+                    format,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AllowWhiteSpaces,
+                    out result))
+                {
+                    return true;
+                }
             }
 
             result = default;
