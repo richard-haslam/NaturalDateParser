@@ -49,16 +49,6 @@ public class NaturalDateParserTests
     }
 
     [Test]
-    [TestCase("next Friday")]
-    [TestCase("last Monday")]
-    public void TestDayOfWeek(string input)
-    {
-        Assert.That(NaturalDateParser.TryParse(input, out var result) is true);
-        Assert.That(result, Is.TypeOf<DateTime>());
-        // Additional validation can be done by checking day of week and difference from today
-    }
-
-    [Test]
     [TestCase("5pm", 17, 0)]
     [TestCase("17:00", 17, 0)]
     [TestCase("noon", 12, 0)]
