@@ -4,14 +4,14 @@ using System.Text.RegularExpressions;
 
 namespace NaturalDateParsing;
 
-public static class DayOfWeekParser
+internal class DayOfWeekParser : INaturalDateParser
 {
     private static readonly Regex Pattern = new Regex(
         @"^(?:(last|next|this)\s+)?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b",
         RegexOptions.IgnoreCase | RegexOptions.Compiled
     );
 
-    public static bool TryParse(string input, out DateTime result)
+    public bool TryParse(string input, out DateTime result)
     {
         result = default;
         var match = Pattern.Match(input.Trim());
