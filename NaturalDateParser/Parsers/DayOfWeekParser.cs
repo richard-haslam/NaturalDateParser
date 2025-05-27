@@ -11,7 +11,13 @@ internal class DayOfWeekParser : INaturalDateParser
         RegexOptions.IgnoreCase | RegexOptions.Compiled
     );
 
-    public bool TryParse(string input, out DateTime result)
+    public bool TryParse(string input, out DateTime result) =>
+        TryParse(input, DateTime.Now, out result);
+
+    public bool TryParse(string input, NaturalDateParserOptions options, out DateTime result) =>
+        TryParse(input, options.ReferenceDate ?? DateTime.Now, out result);
+
+    private static bool TryParse(string input, DateTime referenceDate, out DateTime result)
     {
         result = default;
         var match = Pattern.Match(input.Trim());
@@ -25,7 +31,7 @@ internal class DayOfWeekParser : INaturalDateParser
             return false;
 
         var targetDay = (DayOfWeek)dayObj;
-        var today = DateTime.Now.Date;
+        var today = referenceDate.Date;
         var currentDay = today.DayOfWeek;
 
         int daysToAdd;

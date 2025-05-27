@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaturalDateParser.Tests", "NaturalDateParser.Tests\NaturalDateParser.Tests.csproj", "{2D7E5085-5FE9-4EEC-AC7A-865116CCE200}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaturalDateParser", "NaturalDateParser\NaturalDateParser.csproj", "{B764CB76-164E-4595-B7E2-658E5BBBB9CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +14,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D7E5085-5FE9-4EEC-AC7A-865116CCE200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D7E5085-5FE9-4EEC-AC7A-865116CCE200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D7E5085-5FE9-4EEC-AC7A-865116CCE200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D7E5085-5FE9-4EEC-AC7A-865116CCE200}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B764CB76-164E-4595-B7E2-658E5BBBB9CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B764CB76-164E-4595-B7E2-658E5BBBB9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B764CB76-164E-4595-B7E2-658E5BBBB9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B764CB76-164E-4595-B7E2-658E5BBBB9CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
