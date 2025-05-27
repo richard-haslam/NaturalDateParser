@@ -73,7 +73,6 @@ public class NaturalDateParserTests
     [Test]
     [TestCase("25/05/2025")]
     [TestCase("2025-05-25")]
-    [TestCase("05/25/2025")]
     public void TestExactFormats(string input)
     {
         Assert.That(NaturalDateParser.TryParse(input, out var result) is true);

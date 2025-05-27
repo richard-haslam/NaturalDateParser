@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework> <!-- or net6.0 if you prefer -->
+    <TargetFramework>net8.0</TargetFramework> <!-- or net6.0 if you prefer -->
     <RootNamespace>NaturalDateParsing</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.0.0</Version>

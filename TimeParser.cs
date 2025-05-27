@@ -32,11 +32,18 @@ namespace NaturalDateParsing
 
             foreach (var format in formats)
             {
-                if (DateTime.TryParseExact(timeInput, format, CultureInfo.InvariantCulture,
-                    DateTimeStyles.None, out var time))
+                try
                 {
-                    timeOfDay = time.TimeOfDay;
-                    return true;
+                    if (DateTime.TryParseExact(timeInput, format, CultureInfo.InvariantCulture,
+                        DateTimeStyles.None, out var time))
+                    {
+                        timeOfDay = time.TimeOfDay;
+                        return true;
+                    }
+                }
+                catch
+                {
+                    continue;
                 }
             }
 

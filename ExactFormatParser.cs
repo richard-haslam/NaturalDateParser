@@ -6,8 +6,8 @@ namespace NaturalDateParsing
 {
     internal static class ExactFormatParser
     {
-        private static readonly List<string> _customFormats = new()
-        {
+        private static readonly List<string> _customFormats =
+        [
             "dd/MM/yyyy",
             "d/M/yyyy",
             "dd/MM/yy",
@@ -30,7 +30,7 @@ namespace NaturalDateParsing
             "HH:mm dd/MM/yyyy",
             "HH:mm:ss dd/MM/yyyy",
             "yyyyMMddHHmmss"
-        };
+        ];
 
         public static void AddCustomFormat(string format)
         {
