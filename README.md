@@ -1,3 +1,6 @@
+![Test Status](https://github.com/richard-haslam/NaturalDateParser/actions/workflows/test.yml/badge.svg)
+
+
 # NaturalDateParser
 
 A simple and extensible **natural language date/time parser** for .NET that converts expressions like `"next Friday at 5pm"`, `"2 days ago"`, `"17:00"`, or custom date formats (e.g. `"25/05/2025"`) into `DateTime` objects.
