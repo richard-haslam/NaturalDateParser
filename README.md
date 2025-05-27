@@ -9,16 +9,39 @@ A simple and extensible **natural language date/time parser** for .NET that conv
 
 ---
 
-## Features
+## Day of the week parser
+To keep your parser predictable and testable (especially for automation), the following rules are defined:
+
+### ✅ Definitions Used
+| Expression      | Rule                                                                            |
+| --------------- | ------------------------------------------------------------------------------- |
+| **This \[day]** | The closest upcoming \[day] **in the current week**, or today if it's that day. |
+| **Next \[day]** | The \[day] **in the following week**, even if today is that day.                |
+| **Last \[day]** | The \[day] **in the previous week**, even if today is that day.                 |
+| No modifier     | Treated like `"next"` if the day has passed, or `"this"` if it hasn't.          |
+
+### 🗓️ Example Scenarios (Assume today is Monday, May 27, 2025)
+| Input            | Result            | Explanation                                      |
+| ---------------- | ----------------- | ------------------------------------------------ |
+| `this Monday`    | Mon, May 27, 2025 | Today                                            |
+| `next Monday`    | Mon, June 2, 2025 | Always moves to next week                        |
+| `last Monday`    | Mon, May 19, 2025 | Previous week’s Monday                           |
+| `Friday`         | Fri, May 30, 2025 | This coming Friday (same week)                   |
+| `Monday` (again) | Mon, June 2, 2025 | Treated like `next Monday` since today is Monday |
+| `last Friday`    | Fri, May 23, 2025 | Previous Friday                                  |
+| `next Friday`    | Fri, June 6, 2025 | Friday *after* this week's Friday                |
+
+### 📌 Why This Approach?
+- It avoids ambiguity: "next Friday" always skips this week, even if today is Monday.
+- It makes "this Friday" refer to the nearest upcoming Friday.
+- It makes "last Monday" always go back 1 week.
+- It ensures consistency in automation/test scripts, which need predictable outputs.
+
+## Other Features
 
 - Parse relative dates and times:  
   - `"now"`, `"today"`, `"tomorrow"`, `"yesterday"`  
-  - `"2 days ago"`, `"3 weeks from now"`, `"1 month later"`  
-- Parse day of week expressions:  
-  - `"next Monday"`, `"last Friday"`  
-  - With optional time: `"next Monday at 5pm"`  
-- Parse time expressions:  
-  - `"5pm"`, `"17:00"`, `"noon"`, `"midnight"`  
+  - `"2 days ago"`, `"3 weeks from now"`, `"1 month later"`   
 - Parse exact date/time formats with built-in support for many common patterns and ability to add custom formats:  
   - `"dd/MM/yyyy"`, `"MM/dd/yyyy"`, `"yyyy-MM-dd"`, `"dd-MM-yy"`, etc.  
 - Basic timezone abbreviation handling for offsets like `PST`, `EST`, `UTC`, etc.
