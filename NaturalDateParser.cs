@@ -1,51 +1,50 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace NaturalDateParsing
 {
     public static class NaturalDateParser
     {
+        private static List<INaturalDateParser> _naturalDateParsers;
+
+        static NaturalDateParser() => _naturalDateParsers = DiscoverParsers();
+
         public static bool TryParse(string input, out DateTime result)
         {
-            result = default;
-            if (string.IsNullOrWhiteSpace(input))
-                return false;
-
             input = input.Trim();
+            result = default;
 
-            // 1. Relative dates
-            if (RelativeDateParser.TryParse(input, out result))
-                return true;
+            if (string.IsNullOrEmpty(input)) return false;
 
-            // 2. Days of week like "next Friday"
-            if (DayOfWeekParser.TryParse(input, out result))
-                return true;
-
-            // 3. Time only, like "5pm"
-            if (TimeParser.TryParse(input, out var time))
+            foreach (var parser in _naturalDateParsers)
             {
-                var now = DateTime.Now.Date;
-                result = now + time;
-                return true;
-            }
-
-            // 4. Exact date/time formats
-            if (ExactFormatParser.TryParse(input, out result))
-            {
-                result = TimeZoneHelper.ApplyTimeZoneOffset(input, result);
-                return true;
-            }
-
-            // 5. Fallback to DateTime.TryParse with culture info
-            if (DateTime.TryParse(input, System.Globalization.CultureInfo.CurrentCulture, System.Globalization.DateTimeStyles.AssumeLocal, out result) ||
-                DateTime.TryParse(input, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AssumeLocal, out result))
-            {
-                result = TimeZoneHelper.ApplyTimeZoneOffset(input, result);
-                return true;
+                if (parser.TryParse(input, out result))
+                {
+                    return true;
+                }
             }
 
             return false;
         }
 
-        public static void AddCustomFormat(string format) => ExactFormatParser.AddCustomFormat(format);
+        public static void AddNaturalDateParser(INaturalDateParser naturalDateParser) =>
+            _naturalDateParsers.Add(naturalDateParser);
+
+        private static List<INaturalDateParser> DiscoverParsers()
+        {
+            var parserType = typeof(INaturalDateParser);
+            var assemblies = new[] { Assembly.GetExecutingAssembly() };
+
+            return assemblies
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => parserType.IsAssignableFrom(type)
+                               && type.IsClass
+                               && !type.IsAbstract
+                               && type.GetConstructor(Type.EmptyTypes) != null)
+                .Select(type => (INaturalDateParser)Activator.CreateInstance(type))
+                .ToList();
+        }
     }
 }
