@@ -11,6 +11,12 @@ namespace NaturalDateParsing
 
         static NaturalDateParser() => _naturalDateParsers = DiscoverParsers();
 
+        /// <summary>
+        /// Attempts to parse a natural language date expression into a <see cref="DateTime"/>.
+        /// </summary>
+        /// <param name="input">The natural language date expression (e.g., "today", "next Friday").</param>
+        /// <param name="result">When this method returns, contains the parsed <see cref="DateTime"/> if parsing was successful; otherwise, the default value.</param>
+        /// <returns><c>true</c> if the parsing succeeded; otherwise, <c>false</c>.</returns>
         public static bool TryParse(string input, out DateTime result)
         {
             input = input.Trim();
@@ -29,6 +35,13 @@ namespace NaturalDateParsing
             return false;
         }
 
+        /// <summary>
+        /// Attempts to parse a natural language date expression into a <see cref="DateTime"/>, using custom parser options.
+        /// </summary>
+        /// <param name="input">The natural language date expression (e.g., "in 3 days", "last Monday").</param>
+        /// <param name="options">Custom options that influence how the date is parsed, such as a reference date or locale settings.</param>
+        /// <param name="result">When this method returns, contains the parsed <see cref="DateTime"/> if parsing was successful; otherwise, the default value.</param>
+        /// <returns><c>true</c> if the parsing succeeded; otherwise, <c>false</c>.</returns>
         public static bool TryParse(string input, NaturalDateParserOptions options, out DateTime result)
         {
             input = input.Trim();
@@ -47,6 +60,10 @@ namespace NaturalDateParsing
             return false;
         }
 
+        /// <summary>
+        /// Registers a custom natural date parser to extend the parsing logic.
+        /// </summary>
+        /// <param name="naturalDateParser">An implementation of <see cref="INaturalDateParser"/> to be added to the parser chain.</param>
         public static void AddNaturalDateParser(INaturalDateParser naturalDateParser) =>
             _naturalDateParsers.Add(naturalDateParser);
 
