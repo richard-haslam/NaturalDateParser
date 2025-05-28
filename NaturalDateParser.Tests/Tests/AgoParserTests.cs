@@ -49,4 +49,14 @@ public class AgoParserTests
         Assert.That(result.Month, Is.EqualTo(expected.Month));
         Assert.That(result.Day, Is.EqualTo(expected.Day).Or.LessThanOrEqualTo(DateTime.DaysInMonth(result.Year, result.Month))); // handles Feb 29
     }
+
+    [Test]
+    [TestCase("2 days ago", 2025, 05, 10, -2)]
+    public void ReferenceDate(string input, int year, int month, int day, int offsetDays)
+    {
+        var referenceDate = new DateTime(year, month, day);
+        var expected = referenceDate.AddDays(offsetDays);
+        Assert.That(NaturalDateParser.TryParse(input, new() { ReferenceDate = referenceDate }, out var result), Is.True);
+        Assert.That(result.Date, Is.EqualTo(expected));
+    }
 }

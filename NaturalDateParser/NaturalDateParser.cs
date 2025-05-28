@@ -29,6 +29,24 @@ namespace NaturalDateParsing
             return false;
         }
 
+        public static bool TryParse(string input, NaturalDateParserOptions options, out DateTime result)
+        {
+            input = input.Trim();
+            result = default;
+
+            if (string.IsNullOrEmpty(input)) return false;
+
+            foreach (var parser in _naturalDateParsers)
+            {
+                if (parser.TryParse(input, options, out result))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static void AddNaturalDateParser(INaturalDateParser naturalDateParser) =>
             _naturalDateParsers.Add(naturalDateParser);
 
