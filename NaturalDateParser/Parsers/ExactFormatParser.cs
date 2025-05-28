@@ -32,6 +32,9 @@ internal class ExactFormatParser : INaturalDateParser
         "yyyyMMddHHmmss"
     ];
 
+    public bool TryParse(string input, NaturalDateParserOptions options, out DateTime result) =>
+        TryParse(input, out result);
+
     public bool TryParse(string input, out DateTime result)
     {
         foreach (var format in _customFormats)

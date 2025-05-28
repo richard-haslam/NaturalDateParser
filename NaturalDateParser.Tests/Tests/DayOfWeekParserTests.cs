@@ -112,4 +112,14 @@ public class DayOfWeekParserTests
             Assert.That(result.Date, Is.LessThanOrEqualTo(today.AddDays(7)), "Should be within the next 7 days");
         }
     }
+
+    [Test]
+    [TestCase("next friday", 2025, 05, 10, 6)]
+    public void ReferenceDate(string input, int year, int month, int day, int offsetDays)
+    {
+        var referenceDate = new DateTime(year, month, day);
+        var expected = referenceDate.AddDays(offsetDays);
+        Assert.That(NaturalDateParser.TryParse(input, new() { ReferenceDate = referenceDate }, out var result), Is.True);
+        Assert.That(result.Date, Is.EqualTo(expected));
+    }
 }
