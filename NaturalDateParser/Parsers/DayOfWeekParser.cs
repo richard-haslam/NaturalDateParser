@@ -7,7 +7,7 @@ namespace NaturalDateParsing;
 internal class DayOfWeekParser : INaturalDateParser
 {
     private static readonly Regex Pattern = new Regex(
-        @"^(?:(last|next|this)\s+)?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b",
+        @"^(?:(last|this)\s+)?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b",
         RegexOptions.IgnoreCase | RegexOptions.Compiled
     );
 
@@ -42,12 +42,6 @@ internal class DayOfWeekParser : INaturalDateParser
                 daysToAdd = ((int)targetDay - (int)currentDay - 7) % 7;
                 if (daysToAdd >= 0)
                     daysToAdd -= 7;
-                result = today.AddDays(daysToAdd);
-                return true;
-
-            case "next":
-                daysToAdd = ((int)targetDay - (int)currentDay + 7) % 7;
-                daysToAdd = daysToAdd == 0 ? 7 : daysToAdd;
                 result = today.AddDays(daysToAdd);
                 return true;
 
