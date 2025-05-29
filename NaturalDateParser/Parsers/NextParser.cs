@@ -14,7 +14,6 @@ internal class NextParser : INaturalDateParser
 
     private static bool TryParse(string input, DateTime referenceDate, out DateTime result)
     {
-        Console.WriteLine("ghj");
         switch (input.ToLower())
         {
             case "next year": { result = referenceDate.Date.AddYears(1); return true; }
