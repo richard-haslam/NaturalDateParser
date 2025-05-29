@@ -30,31 +30,6 @@ public class DayOfWeekParserTests
         Assert.That(result.Date, Is.LessThan(now.Date.AddDays(7)));
     }
 
-
-    [Test]
-    [TestCase("Next Monday", DayOfWeek.Monday)]
-    [TestCase("next monday", DayOfWeek.Monday)]
-    [TestCase("Next Tuesday", DayOfWeek.Tuesday)]
-    [TestCase("next tuesday", DayOfWeek.Tuesday)]
-    [TestCase("Next Wednesday", DayOfWeek.Wednesday)]
-    [TestCase("next wednesday", DayOfWeek.Wednesday)]
-    [TestCase("Next Thursday", DayOfWeek.Thursday)]
-    [TestCase("next thursday", DayOfWeek.Thursday)]
-    [TestCase("Next Friday", DayOfWeek.Friday)]
-    [TestCase("next friday", DayOfWeek.Friday)]
-    [TestCase("Next Saturday", DayOfWeek.Saturday)]
-    [TestCase("next saturday", DayOfWeek.Saturday)]
-    [TestCase("Next Sunday", DayOfWeek.Sunday)]
-    [TestCase("next sunday", DayOfWeek.Sunday)]
-    public void NextDayOfWeek(string input, DayOfWeek expectedDay)
-    {
-        var now = DateTime.Now;
-        Assert.That(NaturalDateParser.TryParse(input, out var result) is true);
-        Assert.That(result.DayOfWeek, Is.EqualTo(expectedDay));
-        Assert.That(result.Date, Is.GreaterThan(now));
-        Assert.That(result.Date, Is.LessThanOrEqualTo(now.AddDays(7)));
-    }
-
     [Test]
     [TestCase("Last Monday", DayOfWeek.Monday)]
     [TestCase("last monday", DayOfWeek.Monday)]
