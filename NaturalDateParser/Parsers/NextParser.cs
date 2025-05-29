@@ -33,7 +33,7 @@ internal class NextParser : INaturalDateParser
     private static DateTime GetNextWeekday(DateTime referenceDate, DayOfWeek targetDay)
     {
         var startOfNextWeek = MoveToStartOfNextWeek(referenceDate);
-        int daysUntilTargetDay = ((int)targetDay - (int)startOfNextWeek.DayOfWeek + 7) % 7;
+        int daysUntilTargetDay = ((int)targetDay - (int)DayOfWeek.Monday + 7) % 7;
 
         return startOfNextWeek.AddDays(daysUntilTargetDay);
     }
