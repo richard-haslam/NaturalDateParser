@@ -12,11 +12,11 @@ public class ThisParserTests
     [TestCase("This Tuesday", DayOfWeek.Tuesday, 2025, 06, 03)]
     [TestCase("this tuesday", DayOfWeek.Tuesday, 2025, 06, 03)]
     [TestCase("This Wednesday", DayOfWeek.Wednesday, 2025, 06, 04)]
-    [TestCase("this wednesday", DayOfWeek.Wednesday, 2035, 06, 04)]
+    [TestCase("this wednesday", DayOfWeek.Wednesday, 2025, 06, 04)]
     [TestCase("This Thursday", DayOfWeek.Thursday, 2025, 06, 05)]
     [TestCase("this thursday", DayOfWeek.Thursday, 2025, 06, 05)]
-    [TestCase("This Friday", DayOfWeek.Friday, 2025, 06, 07)]
-    [TestCase("this friday", DayOfWeek.Friday, 2025, 06, 07)]
+    [TestCase("This Friday", DayOfWeek.Friday, 2025, 06, 06)]
+    [TestCase("this friday", DayOfWeek.Friday, 2025, 06, 06)]
     [TestCase("This Saturday", DayOfWeek.Saturday, 2025, 05, 31)]
     [TestCase("this saturday", DayOfWeek.Saturday, 2025, 05, 31)]
     [TestCase("This Sunday", DayOfWeek.Sunday, 2025, 06, 01)]
@@ -28,6 +28,6 @@ public class ThisParserTests
 
         Assert.That(NaturalDateParser.TryParse(input, options, out var result), Is.True);
         Assert.That(result.DayOfWeek, Is.EqualTo(expectedDay));
-        Assert.That(result.Date, Is.GreaterThanOrEqualTo(expectedDate));
+        Assert.That(result, Is.EqualTo(expectedDate));
     }
 }
