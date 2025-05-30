@@ -13,7 +13,7 @@ internal class ThisParser : INaturalDateParser
 
     private static bool TryParse(string input, DateTime referenceDate, out DateTime result)
     {
-        switch (input.ToLower())
+        switch (input.ToLower().Replace("this coming ", "this "))
         {
             case "this monday": { result = GetThisDay(referenceDate, DayOfWeek.Monday); return true; }
             case "this tuesday": { result = GetThisDay(referenceDate, DayOfWeek.Tuesday); return true; }
