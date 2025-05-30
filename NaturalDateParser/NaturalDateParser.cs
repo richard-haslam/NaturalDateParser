@@ -29,7 +29,7 @@ namespace NaturalDateParsing
                 if (parser.TryParse(input, out result))
                 {
                     #if DEBUG
-                        Console.WriteLine($"Parsed using: {parser.GetType().Name}");
+                        Console.WriteLine($"'{input}' was parsed to '{result}' using: '{parser.GetType().Name}'");
                     #endif
                     return true;
                 }
@@ -57,7 +57,7 @@ namespace NaturalDateParsing
                 if (parser.TryParse(input, options, out result))
                 {
                     #if DEBUG
-                        Console.WriteLine($"Parsed using: {parser.GetType().Name}");
+                        Console.WriteLine($"'{input}' was parsed to '{result}' using: {parser.GetType().Name}");
                     #endif
                     return true;
                 }
