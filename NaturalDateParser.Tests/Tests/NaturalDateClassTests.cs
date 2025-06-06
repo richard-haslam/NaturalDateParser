@@ -24,11 +24,20 @@ public class NaturalDateClassTests
 
     [Test]
     [TestCase("tomorrow")]
-    public void NaturalDateClassCastableTests(string input)
+    public void NaturalDateClassCastToDateTimeTests(string input)
     {
         var expected = DateTime.Now.Date.AddDays(1);
         var naturalDate = new NaturalDateTime(input);
         Assert.That((DateTime)naturalDate, Is.EqualTo(expected));
+    }
+
+    [Test]
+    [TestCase("tomorrow")]
+    public void NaturalDateClassCastToDateOnlyTests(string input)
+    {
+        var expected = DateOnly.FromDateTime(DateTime.Now.Date.AddDays(1));
+        var naturalDate = new NaturalDateTime(input);
+        Assert.That((DateOnly)naturalDate, Is.EqualTo(expected));
     }
 
     [Test]
