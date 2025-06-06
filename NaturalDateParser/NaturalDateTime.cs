@@ -18,7 +18,8 @@ public class NaturalDateTime
         }
     }
 
-    public static implicit operator DateTime(NaturalDateTime naturalDateTime) => naturalDateTime._dateTime;
+    public static explicit operator DateTime(NaturalDateTime naturalDateTime) => naturalDateTime._dateTime;
+    public static explicit operator DateOnly(NaturalDateTime naturalDateTime) => DateOnly.FromDateTime(naturalDateTime._dateTime);
 
     public DateTime DateTime => _dateTime;
     public string OriginalString => _originalString;
