@@ -9,6 +9,7 @@
     <PackageId>NaturalDateParser</PackageId>
     <Description>A natural language date/time parser for .NET that handles expressions like 'next Friday at 5pm' and '2 days ago'.</Description>
     <PackageTags>date parser;natural language;datetime</PackageTags>
+    <PackageProjectUrl>https://github.com/richard-haslam/NaturalDateParser</PackageProjectUrl>
   </PropertyGroup>
 
 </Project>
